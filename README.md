@@ -1,3 +1,2 @@
 # ios_tutorial_redux
-
-![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/ceb909d6-f02d-4fce-93b9-8b8f75c242d8/Untitled.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/ceb909d6-f02d-4fce-93b9-8b8f75c242d8/Untitled.png)
+![image](https://user-images.githubusercontent.com/67617819/124408965-58c93380-dd82-11eb-8ce9-8b17c80c5d25.png)
