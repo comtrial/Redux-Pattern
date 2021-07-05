@@ -25,10 +25,6 @@
 
 구현이 되는 흐름과 구현을 위한 코드의 작성 흐름은 다르다고 생각하여 두가지의 흐름으로 정리
 
-## Redux의 등록 흐름
-
-
-
 
 ## Redux의 동작 흐름
 
@@ -78,5 +74,103 @@ func appReducer(_ state: inout AppState, _ action: AppAction) -> Void {
 
 
 3. 위의 Reducer의 실행을 통해 변경된 Store의 상태 값 변경을 통한 View의 갱신 진행
-```ㅅㅣ
+
+
+---
+## Redux의 등록 흐름
+
+1. Store 생성: State와 Action 정의 
+
 ```
+typealias AppStore = Store<AppState, AppAction>
+
+// ObservableObject 앱 상태를 가지고 있는 변수
+// 상태가 변함을 감지하고 Binding 을 해줌
+final class Store<State, Action>: ObservableObject {
+    
+    // 상태의 변경이 일어날 경우 받아주는 published
+    @Published private(set) var state: State
+    
+    // 외부에서 읽을 수만 있도록 private(set)
+    private let reducer: Reducer<State, Action>
+    
+    
+    //생성자: State와 Reducer를 넣어줘서 Store를 만들어준다.
+    // Reducer는 closer이기 때문에 escape 달아줌
+    init(state: State, reducer: @escaping Reducer<State, Action>) {
+        self.state = state
+        self.reducer = reducer
+    }
+    
+    //디스패치를 통해 액션을 행한다.
+    func dispatch(action: Action) {
+        // inout 매개변수를 넣을 때는 & 를 사용한다.
+        // 리듀서 클로저를 실행해서 액션을 필터링 한다.
+        reducer(&self.state, action)
+    }
+}
+```
+
+2. Reducer 등록: 앱의 상태 값 변경
+  : 구현 하고자 하는 액션에 대한 정의 및 분기 처리 진행
+
+```
+typealias Reducer<State, Action> = (inout State, Action) -> Void
+// (inout State, Action) -> void 해당 클로저 자체를 Reducer로 칭함 State와 Action을 기지고 있음
+
+//필터링을 해주는 메서드
+func appReducer(_ state: inout AppState, _ action: AppAction) -> Void {
+    //들어오는 액션에 따른 분기처리 진행 - 필터링
+    switch action {
+    case .rollTheDice:
+        print(#fileID, #function, #line, "AppReducer 실행됨")
+        // 앱의 상태 값 변경
+        state.currentDice = [
+        "⚀","⚁","⚂","⚃","⚄","⚅"
+        ].randomElement() ?? "⚀" 
+    }
+}
+```
+ 
+
+3. main에서 상태관리를 해주고 싶은 View에 store 등록을 한다. 
+  `DiceView().environmentObject(store)`
+
+```
+struct ContentView: View {
+    var body: some View {
+        // store 생성
+        let store = AppStore(
+            state: AppState.init(currentDice: "⚀"),
+            reducer: appReducer(_:_:)
+        )
+        // <Binding> -> UI 와 Store를 bkinding 시켜줌
+        // View에 observerObject를 넣기 위해서는 environmentObject를 넣어주면 된다.
+        // 하위 view에 변경 가능한 녀석(AppStore)을 넣어준다.
+        // 서브부에 옵저버블 오브젝트를 연결한다.
+        DiceView().environmentObject(store)
+    }
+}
+```
+
+4. 직접적으로 상태를 관리하고 싶은 View()에 store 전달 받음
+
+```
+    // 외부에서 등록한 environmentObject() 덕분에 store를 넘겨 받을 수 있음
+    @EnvironmentObject var store : AppStore
+```
+
+5. View()에 action func 등록
+  : 넘겨받은 store를 사용하여 dispatch를 통해 action에 접근하여 상태 값 변경
+```
+    // 주사위 굴리기 액션을 실행한다.
+    func rollTheDice(){
+        // 디버깅 방법
+        print(#fileID, #function, #line)
+        self.shouldRoll.toggle()
+        // dispatch를 통해 action을 넣어줌
+        self.store.dispatch(action: .rollTheDice)
+    }
+```
+
+6. Store를 등록하였기 때문에 state의 변경이 일어날 경우 자동으로 화면 
