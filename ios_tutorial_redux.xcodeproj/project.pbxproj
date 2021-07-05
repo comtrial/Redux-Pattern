@@ -13,7 +13,12 @@
 		F639CEA22691EC7D0048F2C5 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F639CEA12691EC7D0048F2C5 /* Preview Assets.xcassets */; };
 		F639CEAD2691EC7D0048F2C5 /* ios_tutorial_reduxTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F639CEAC2691EC7D0048F2C5 /* ios_tutorial_reduxTests.swift */; };
 		F639CEB82691EC7D0048F2C5 /* ios_tutorial_reduxUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F639CEB72691EC7D0048F2C5 /* ios_tutorial_reduxUITests.swift */; };
-		F639CEC62691ED5C0048F2C5 /* dice_preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = F639CEC52691ED5C0048F2C5 /* dice_preview.swift */; };
+		F639CEC62691ED5C0048F2C5 /* DiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F639CEC52691ED5C0048F2C5 /* DiceView.swift */; };
+		F639CEC82691F0D20048F2C5 /* MyButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = F639CEC72691F0D20048F2C5 /* MyButtonStyle.swift */; };
+		F639CECA2691F3460048F2C5 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = F639CEC92691F3460048F2C5 /* AppState.swift */; };
+		F639CECC2691F3F00048F2C5 /* AppAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = F639CECB2691F3F00048F2C5 /* AppAction.swift */; };
+		F639CECE2691F5550048F2C5 /* Reducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F639CECD2691F5550048F2C5 /* Reducer.swift */; };
+		F639CED02691F8910048F2C5 /* AppStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F639CECF2691F8910048F2C5 /* AppStore.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,7 +51,12 @@
 		F639CEB32691EC7D0048F2C5 /* ios_tutorial_reduxUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ios_tutorial_reduxUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F639CEB72691EC7D0048F2C5 /* ios_tutorial_reduxUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ios_tutorial_reduxUITests.swift; sourceTree = "<group>"; };
 		F639CEB92691EC7D0048F2C5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F639CEC52691ED5C0048F2C5 /* dice_preview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dice_preview.swift; sourceTree = "<group>"; };
+		F639CEC52691ED5C0048F2C5 /* DiceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiceView.swift; sourceTree = "<group>"; };
+		F639CEC72691F0D20048F2C5 /* MyButtonStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyButtonStyle.swift; sourceTree = "<group>"; };
+		F639CEC92691F3460048F2C5 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
+		F639CECB2691F3F00048F2C5 /* AppAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppAction.swift; sourceTree = "<group>"; };
+		F639CECD2691F5550048F2C5 /* Reducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reducer.swift; sourceTree = "<group>"; };
+		F639CECF2691F8910048F2C5 /* AppStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStore.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,9 +108,15 @@
 			isa = PBXGroup;
 			children = (
 				F639CE9A2691EC7B0048F2C5 /* ios_tutorial_reduxApp.swift */,
+				F639CEC92691F3460048F2C5 /* AppState.swift */,
+				F639CECF2691F8910048F2C5 /* AppStore.swift */,
+				F639CEC72691F0D20048F2C5 /* MyButtonStyle.swift */,
+				F639CEC52691ED5C0048F2C5 /* DiceView.swift */,
 				F639CE9C2691EC7B0048F2C5 /* ContentView.swift */,
 				F639CE9E2691EC7D0048F2C5 /* Assets.xcassets */,
 				F639CEA32691EC7D0048F2C5 /* Info.plist */,
+				F639CECB2691F3F00048F2C5 /* AppAction.swift */,
+				F639CECD2691F5550048F2C5 /* Reducer.swift */,
 				F639CEA02691EC7D0048F2C5 /* Preview Content */,
 			);
 			path = ios_tutorial_redux;
@@ -110,7 +126,6 @@
 			isa = PBXGroup;
 			children = (
 				F639CEA12691EC7D0048F2C5 /* Preview Assets.xcassets */,
-				F639CEC52691ED5C0048F2C5 /* dice_preview.swift */,
 			);
 			path = "Preview Content";
 			sourceTree = "<group>";
@@ -263,8 +278,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				F639CE9D2691EC7B0048F2C5 /* ContentView.swift in Sources */,
+				F639CECC2691F3F00048F2C5 /* AppAction.swift in Sources */,
+				F639CECA2691F3460048F2C5 /* AppState.swift in Sources */,
+				F639CEC82691F0D20048F2C5 /* MyButtonStyle.swift in Sources */,
+				F639CECE2691F5550048F2C5 /* Reducer.swift in Sources */,
 				F639CE9B2691EC7B0048F2C5 /* ios_tutorial_reduxApp.swift in Sources */,
-				F639CEC62691ED5C0048F2C5 /* dice_preview.swift in Sources */,
+				F639CEC62691ED5C0048F2C5 /* DiceView.swift in Sources */,
+				F639CED02691F8910048F2C5 /* AppStore.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
