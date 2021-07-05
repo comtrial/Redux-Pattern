@@ -173,4 +173,8 @@ struct ContentView: View {
     }
 ```
 
-6. Store를 등록하였기 때문에 state의 변경이 일어날 경우 자동으로 화면 
+6. Store를 등록하였기 때문에 state의 변경이 일어날 경우 자동으로 화면 갱신
+
+
+![ezgif com-gif-maker](https://user-images.githubusercontent.com/67617819/124414203-2ffa6b80-dd8d-11eb-8115-e7750717b638.gif)
+
